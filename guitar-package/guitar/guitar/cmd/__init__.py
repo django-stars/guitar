@@ -31,15 +31,23 @@ import handlers.search
 import handlers.create
 import handlers.investigate
 
+HANDLERS = {
+        'install': handlers.install.InstallHandler,
+        'search': handlers.search.SearchHandler,
+        'investigate': handlers.investigate.InvestigateHandler,
+        'create': handlers.create.CreateHandler
+    }
 
 class Router(object):
-    COMMANDS = ['install', 'search', 'investigate', 'create']
     def __init__(self, arguments):
         self.options = Options(arguments)
         self.command = self.get_command(arguments)
 
     def get_command(self, arguments):
-        commands = [x for x in self.COMMANDS if arguments.get(x)]
+        # As docopt allow to have many commands for single progremm.
+        # We require only one. So that, let's go throught all keys for
+        # dict, which docopt return and find those, where value = True
+        commands = [x for x in HANDLERS.keys() if arguments.get(x)]
         assert len(commands) == 1
         return commands[0]
 
@@ -47,12 +55,7 @@ class Router(object):
         # There is dict of available handlers, imported from handlers package.
         # We found right handler by key=command and provide 2 args:
         # command name and prettified options.
-        {
-            'install': handlers.install.InstallHandler,
-            'search': handlers.search.SearchHandler,
-            'investigate': handlers.investigate.InvestigateHandler,
-            'create': handlers.create.CreateHandler
-        }[self.command](self.command, self.options)
+        HANDLERS[self.command](self.command, self.options)
 
 
 class Options(object):

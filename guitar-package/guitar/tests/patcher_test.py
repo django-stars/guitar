@@ -1,7 +1,7 @@
 import unittest
 import shutil
 import os
-from guitar.patcher import Patcher, SettingsPatcher, MiddlewarePatcher
+from guitar.patcher import Patcher, SettingsPatcher, MiddlewarePatcher, AppsPatcher
 
 
 class TestPatcher(unittest.TestCase):
@@ -216,6 +216,109 @@ WSGI_APPLICATION = 'guitar.wsgi.application'
 """
         patch_obj = {'before': None, 'after': 'django.contrib.messages.middleware.MessageMiddleware', 'middleware': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
+        self.assertEqual(settings_py_append_before, new_settings_py)
+
+
+class AppsTestPatcher(unittest.TestCase):
+    settings_py = """
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin'
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+"""
+
+    def test_patch_after(self):
+        settings_py_append_after = """
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'foo.bar',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin'
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+"""
+
+        patch_obj = {'before': None, 'after': 'django.contrib.sites', 'app': 'foo.bar'}
+        new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
+        self.assertEqual(settings_py_append_after, new_settings_py)
+
+    def test_append_before(self):
+        settings_py_append_before = """
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'foo.bar',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin'
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+"""
+        patch_obj = {'after': None, 'before': 'django.contrib.sites', 'app': 'foo.bar'}
+        new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
+        self.assertEqual(settings_py_append_before, new_settings_py)
+
+    def test_append_first(self):
+        settings_py_append_before = """
+INSTALLED_APPS = (
+    'foo.bar',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin'
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+"""
+        patch_obj = {'after': None, 'before': 'django.contrib.auth', 'app': 'foo.bar'}
+        new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
+        self.assertEqual(settings_py_append_before, new_settings_py)
+
+    def test_append_last(self):
+        settings_py_append_before = """
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'foo.bar',
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+"""
+        patch_obj = {'before': None, 'after': 'django.contrib.admin', 'app': 'foo.bar'}
+        new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
 

@@ -1,0 +1,9 @@
+README.txt
+setup.py
+bin/guitar
+guitar/__init__.py
+guitar.egg-info/PKG-INFO
+guitar.egg-info/SOURCES.txt
+guitar.egg-info/dependency_links.txt
+guitar.egg-info/requires.txt
+guitar.egg-info/top_level.txt

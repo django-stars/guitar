@@ -1,4 +1,5 @@
 *.log
 *.pot
 *.pyc
-settings_local.py
+*.db
+guitar-web/src/guitar/settings/local.py

@@ -1,0 +1,21 @@
+from .base import *
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    ('Example', 'example@example.com'),
+)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # 'postgresql_psycopg2', sqlite3'.
+        'NAME': 'guitar.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+SECRET_KEY = '4m70f5wnk&=(_)-+uw1x0jvxa!&us71xe$ge!+s9!+e7@hg5zp'

@@ -5,17 +5,29 @@ class Configurator(object):
 
     def get_patches(self):
         return {
-            'urls': [
-                {'obj': "url(r'^admin/', include(admin.site.urls))"},
-            ],
-            'middleware': [
-                {
-                    'obj': 'django.contrib.messages.middleware.MessageMiddleware',
-                    'between': ('django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware')
-                },
-            ],
-            'settings': [
-                "VAR_A=5",
-                "FOO={'a': 'b'}"
-            ]
+            'urls': {
+                'patch': {'obj': "url(r'^admin/', include(admin.site.urls))"},
+                'file_path': 'urls.py'
+            },
+            'middleware': {
+                'patch': [
+                    {
+                        'obj': 'django.contrib.messages.middleware.MessageMiddleware',
+                        'between': ('django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware'),
+                        # or
+                        'before': 'django.middleware.common.CommonMiddleware',
+                        # or
+                        'after': 'django.middleware.common.CommonMiddleware',
+                    },
+                ],
+                'file_path': 'middleware.py'
+            },
+            'settings': {
+                'patch': [
+                    "VAR_A=5",
+                    "FOO={'a': 'b'}"
+                ],
+                'file_path': 'settings.py'
+
+            }
         }

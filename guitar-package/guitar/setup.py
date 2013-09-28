@@ -13,8 +13,9 @@ setup(
     license=open('LICENSE.md').read(),
     long_description=open('README.txt').read(),
     install_requires=[
-        "pip>= 1.4.1",
+        "pip>= 1.3.1",
         "clint>= 0.3.1",
         "docopt>= 0.6.1"
     ],
+    test_suite='tests'
 )

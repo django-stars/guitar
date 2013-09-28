@@ -3,3 +3,14 @@
 *.pyc
 *.db
 guitar-web/src/guitar/settings/local.py
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+.idea
+.test-site
+.sass-cache
+models.png
+*.sublime-project
+*.sublime-workspace

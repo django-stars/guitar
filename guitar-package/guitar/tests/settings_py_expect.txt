@@ -1,0 +1,14 @@
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+)
+
+ROOT_URLCONF = 'guitar.urls'
+
+WSGI_APPLICATION = 'guitar.wsgi.application'
+
+FOO='BAR'
+APP_DATA = {'x': 5, 'y':['1','2','3']}

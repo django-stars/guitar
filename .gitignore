@@ -3,6 +3,7 @@
 *.pyc
 *.db
 guitar-web/src/guitar/settings/local.py
+guitar-package/guitar/guitar.egg-info/
 
 # Mr Developer
 .mr.developer.cfg

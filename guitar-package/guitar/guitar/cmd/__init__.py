@@ -35,7 +35,10 @@ HANDLERS = {
         'install': handlers.install.InstallHandler,
         'search': handlers.search.SearchHandler,
         'investigate': handlers.investigate.InvestigateHandler,
-        'create': handlers.create.CreateHandler
+        'create': handlers.create.CreateHandler,
+        # Key is so strange as it is should be similar to key in
+        # arguments dict, returned by docopt.
+        '--version': handlers.base.VersionHandler,
     }
 
 class Router(object):
@@ -48,7 +51,8 @@ class Router(object):
         # We require only one. So that, let's go throught all keys for
         # dict, which docopt return and find those, where value = True
         commands = [x for x in HANDLERS.keys() if arguments.get(x)]
-        assert len(commands) == 1
+        assert len(commands) > 0, 'Seems we have command w/o related handler.'
+        assert len(commands) < 2, 'We accept only one command per call'
         return commands[0]
 
     def route(self):

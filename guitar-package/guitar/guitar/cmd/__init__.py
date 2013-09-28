@@ -31,28 +31,35 @@ import handlers.search
 import handlers.create
 import handlers.investigate
 
+HANDLERS = {
+        'install': handlers.install.InstallHandler,
+        'search': handlers.search.SearchHandler,
+        'investigate': handlers.investigate.InvestigateHandler,
+        'create': handlers.create.CreateHandler,
+        # Key is so strange as it is should be similar to key in
+        # arguments dict, returned by docopt.
+        '--version': handlers.base.VersionHandler,
+    }
 
 class Router(object):
-    COMMANDS = ['install', 'search', 'investigate', 'create']
     def __init__(self, arguments):
         self.options = Options(arguments)
         self.command = self.get_command(arguments)
 
     def get_command(self, arguments):
-        commands = [x for x in self.COMMANDS if arguments.get(x)]
-        assert len(commands) == 1
+        # As docopt allow to have many commands for single progremm.
+        # We require only one. So that, let's go throught all keys for
+        # dict, which docopt return and find those, where value = True
+        commands = [x for x in HANDLERS.keys() if arguments.get(x)]
+        assert len(commands) > 0, 'Seems we have command w/o related handler.'
+        assert len(commands) < 2, 'We accept only one command per call'
         return commands[0]
 
     def route(self):
         # There is dict of available handlers, imported from handlers package.
         # We found right handler by key=command and provide 2 args:
         # command name and prettified options.
-        {
-            'install': handlers.install.InstallHandler,
-            'search': handlers.search.SearchHandler,
-            'investigate': handlers.investigate.InvestigateHandler,
-            'create': handlers.create.CreateHandler
-        }[self.command](self.command, self.options)
+        HANDLERS[self.command](self.command, self.options)
 
 
 class Options(object):

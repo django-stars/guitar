@@ -1,9 +1,11 @@
 from distutils.core import setup
 import setuptools
 
+from guitar import VERSION
+
 setup(
     name='guitar',
-    version='0.1.0',
+    version=VERSION,
     author='guitar team',
     author_email='...',
     url='http://pypi.python.org/pypi/guitar/',

@@ -13,7 +13,7 @@ def confirm(question, default=False, prompt=None):
     prompt_addon = prompt or "[Y/n]" if default else "[N/y]"
     prompt = "{}{} {}: ".format(QUESTION_PREFIX, question.strip(), colored.green(prompt_addon))
     while True:
-        val = raw_input(prompt)
+        val = raw_input(prompt).lower()
         if val.strip() == "":
             return default
         if val in ANSWERS_YES:

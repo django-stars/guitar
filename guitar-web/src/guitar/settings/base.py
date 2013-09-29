@@ -2,7 +2,7 @@ import os
 import sys
 
 PROJECT_DIR = os.path.join(os.path.dirname(__file__), '..')
-sys.path.append(os.path.join(PROJECT_DIR))
+sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
 PUBLIC_DIR = os.path.join(PROJECT_DIR, '..', 'public')
 
 DEBUG = False
@@ -73,7 +73,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'guitar.configurator'
+    'django_extensions',
+
+    'south',
+    'django_ace',
+
+    'chord',
+    'configurator'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

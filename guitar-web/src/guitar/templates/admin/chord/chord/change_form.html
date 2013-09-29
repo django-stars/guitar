@@ -1,0 +1,19 @@
+{% extends "admin/change_form.html" %}
+
+{% block footer %}
+{{block.super}}
+<script>
+    var j = django.jQuery
+    j("label[for=id_configuration]").css("display", "none");
+    var p = j(".field-configuration");
+    var e = j(".django-ace-widget");
+    p.css("padding", "0");
+    p.height("450px");
+    e.height("450px");
+    j(window).bind("resize", function(){
+        // Not work if make window smaller.
+        e.width(p.width())
+    });
+    j(window).resize();
+</script>
+{% endblock footer %}

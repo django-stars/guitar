@@ -1,11 +1,12 @@
 [{
     "type": "settings",
     "template_type": "file",
+    "variables": ["engine", "db_user", "db_password", "db_name"],
     "questions":[{
         "title":"Select db engine",
-        "type": "ansvers_list",
+        "type": "answers_list",
         "variable": "engine",
-        "ansvers": [
+        "answers": [
             { "value":"postgresql_psycopg2", "title":"I want use postgresql_psycopg2"},
             { "value":"postgresql", "title":"I want use postgresql"},
             { "value":"mysql", "title":"I want use mysql"},
@@ -17,7 +18,7 @@
          "variable":"db_user",
          "type": "input",
          "exclude": [
-            {"varible":"engine", "value":"sqlite3"}
+            {"variable":"engine", "value":"sqlite3"}
          ]
       },
       {
@@ -25,7 +26,7 @@
          "variable":"db_password",
          "type":"input",
          "exclude":[
-            {"varible":"engine", "value":"sqlite3"}
+            {"variable":"engine", "value":"sqlite3"}
          ]
       }
    ]
@@ -33,6 +34,7 @@
 {
     "type": "urls",
     "template": "url(r'%(url_re)s', include('foo.urls'))",
+    "variables": ["url_re"],
     "questions": [
         {
             "title": "Enter reg exp for app urls. Or skip if want use default value - ^foo/",

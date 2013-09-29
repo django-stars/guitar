@@ -20,12 +20,8 @@ class TestPatcher(unittest.TestCase):
         patcher_obj = {
             'settings': {
                 'file_path': self.settings_py_path,
-                'patch': ["FOO='BAR'", "APP_DATA = {'x': 5, 'y':['1','2','3']}"]
-            },
-            # 'middleware': {
-            #     'file_path': self.settings_py_path,
-            #     'patch': ["FOO='BAR'", "APP_DATA = {'x': 5, 'y':['1','2','3']}"]
-            # }
+                'patch': {'item_to_add': "FOO='BAR'\nAPP_DATA = {'x': 5, 'y':['1','2','3']}"}
+            }
         }
 
         Patcher().patch(patcher_obj)
@@ -71,7 +67,7 @@ APP_DATA = {'x': 5, 'y':['1','2','3']}
 """
 
     def test_patch_settings(self):
-        patch_obj = ["FOO='BAR'", "APP_DATA = {'x': 5, 'y':['1','2','3']}"]
+        patch_obj = {'item_to_add': "FOO='BAR'\nAPP_DATA = {'x': 5, 'y':['1','2','3']}"}
         new_settings_py = SettingsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(self.settings_py_after_patch, new_settings_py)
 
@@ -127,7 +123,7 @@ ROOT_URLCONF = 'guitar.urls'
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
 
-        patch_obj = {'before': None, 'after': 'django.middleware.csrf.CsrfViewMiddleware', 'middleware': 'foo.middleware.bar'}
+        patch_obj = {'before': None, 'after': 'django.middleware.csrf.CsrfViewMiddleware', 'item_to_add': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_after, new_settings_py)
 
@@ -156,7 +152,7 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'after': None, 'before': 'django.middleware.csrf.CsrfViewMiddleware', 'middleware': 'foo.middleware.bar'}
+        patch_obj = {'after': None, 'before': 'django.middleware.csrf.CsrfViewMiddleware', 'item_to_add': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -185,7 +181,7 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'after': None, 'before': 'django.middleware.common.CommonMiddleware', 'middleware': 'foo.middleware.bar'}
+        patch_obj = {'after': None, 'before': 'django.middleware.common.CommonMiddleware', 'item_to_add': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -214,11 +210,11 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'before': None, 'after': 'django.contrib.messages.middleware.MessageMiddleware', 'middleware': 'foo.middleware.bar'}
+        patch_obj = {'before': None, 'after': 'django.contrib.messages.middleware.MessageMiddleware', 'item_to_add': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
-        patch_obj = {'before': None, 'after': None, 'middleware': 'foo.middleware.bar'}
+        patch_obj = {'before': None, 'after': None, 'item_to_add': 'foo.middleware.bar'}
         new_settings_py = MiddlewarePatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -259,7 +255,7 @@ ROOT_URLCONF = 'guitar.urls'
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
 
-        patch_obj = {'before': None, 'after': 'django.contrib.sites', 'app': 'foo.bar'}
+        patch_obj = {'before': None, 'after': 'django.contrib.sites', 'item_to_add': 'foo.bar'}
         new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_after, new_settings_py)
 
@@ -280,7 +276,7 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'after': None, 'before': 'django.contrib.sites', 'app': 'foo.bar'}
+        patch_obj = {'after': None, 'before': 'django.contrib.sites', 'item_to_add': 'foo.bar'}
         new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -301,7 +297,7 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'after': None, 'before': 'django.contrib.auth', 'app': 'foo.bar'}
+        patch_obj = {'after': None, 'before': 'django.contrib.auth', 'item_to_add': 'foo.bar'}
         new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -322,11 +318,11 @@ ROOT_URLCONF = 'guitar.urls'
 
 WSGI_APPLICATION = 'guitar.wsgi.application'
 """
-        patch_obj = {'before': None, 'after': 'django.contrib.admin', 'app': 'foo.bar'}
+        patch_obj = {'before': None, 'after': 'django.contrib.admin', 'item_to_add': 'foo.bar'}
         new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
-        patch_obj = {'before': None, 'after': None, 'app': 'foo.bar'}
+        patch_obj = {'before': None, 'after': None, 'item_to_add': 'foo.bar'}
         new_settings_py = AppsPatcher().apply_patch(self.settings_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -378,7 +374,7 @@ urlpatterns = patterns('',
 )
 """
 
-        patch_obj = {'before': None, 'after': '^admin/', 'url': "url(_(r'^foo/'), include('foo.urls'))"}
+        patch_obj = {'before': None, 'after': '^admin/', 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_urls_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(settings_py_append_after, new_urls_py)
     def test_append_before(self):
@@ -404,7 +400,7 @@ urlpatterns = patterns('',
     url(_(r'^accounts/'), include('django.contrib.auth.urls'))
 )
 """
-        patch_obj = {'after': None, 'before': 'django.views.generic.simple.redirect_to', 'url': "url(_(r'^foo/'), include('foo.urls'))"}
+        patch_obj = {'after': None, 'before': 'django.views.generic.simple.redirect_to', 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_settings_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(urls_py_append_before, new_settings_py)
 
@@ -431,7 +427,7 @@ urlpatterns = patterns('',
     url(_(r'^accounts/'), include('django.contrib.auth.urls'))
 )
 """
-        patch_obj = {'after': None, 'before': 'admin.site.urls', 'url': "url(_(r'^foo/'), include('foo.urls'))"}
+        patch_obj = {'after': None, 'before': 'admin.site.urls', 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_settings_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
@@ -458,10 +454,10 @@ urlpatterns = patterns('',
     url(_(r'^foo/'), include('foo.urls')),
 )
 """
-        patch_obj = {'before': None, 'after': 'django.contrib.auth.urls', 'url': "url(_(r'^foo/'), include('foo.urls'))"}
+        patch_obj = {'before': None, 'after': 'django.contrib.auth.urls', 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_settings_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)
 
-        patch_obj = {'before': None, 'after': None, 'url': "url(_(r'^foo/'), include('foo.urls'))"}
+        patch_obj = {'before': None, 'after': None, 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_settings_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(settings_py_append_before, new_settings_py)

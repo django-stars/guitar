@@ -1,8 +1,7 @@
-from .base import CommandHandler
-
-from guitar.inquirer import dialogs
 from guitar.inquirer import messages
 from guitar import fetcher
+from .base import CommandHandler
+
 
 class SearchHandler(CommandHandler):
     def handle(self):

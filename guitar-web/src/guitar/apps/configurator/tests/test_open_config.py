@@ -15,7 +15,5 @@ class TestOpenConfig(TestCase):
         app_name = 'test'
         config_json = prepare_configuration_json(app_name)
 
-        with open(os.path.join(TESTS_PATH,  'test_open_config_expect.txt'), 'r') as expect:
+        with open(os.path.join(TESTS_PATH, 'test_open_config_expect.txt'), 'r') as expect:
             self.assertEqual(expect.read(), config_json + '\n')
-
-

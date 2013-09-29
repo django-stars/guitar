@@ -3,6 +3,7 @@ from clint.textui import colored
 
 from . import MAX_WIDTH
 
+
 class DialogBase(object):
     question_prefix = "> "  # Prefix will be showed for first line of question
     question_prefix_len = len(question_prefix)  # Help text (if given), will be indented for len of prefix
@@ -62,7 +63,7 @@ class DialogBase(object):
         if self.help_text:
             print(colored.blue(self.get_title_line()))
             print(self.get_help_text())
-            print("{}{}".format(" "* self.question_prefix_len, self.get_prompt())),
+            print("{}{}".format(" " * self.question_prefix_len, self.get_prompt())),
         else:
             if self.default is not None:
                 print("{} {}".format(colored.blue(self.get_title_line()), self.get_prompt())),
@@ -82,6 +83,7 @@ class DialogBase(object):
 
 class Ask(DialogBase):
     pass
+
 
 class YesNo(DialogBase):
     ANSWERS_YES = "y yes true sure ok 1 tada".split()

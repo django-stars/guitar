@@ -1,8 +1,10 @@
 from django.db import models
 
+
 class ChordManager(models.Manager):
     def get_query_set(self):
         return super(ChordManager, self).get_query_set().filter(is_active=True)
+
 
 class Chord(models.Model):
     # We are safe to use title as slug as it is not possible to have

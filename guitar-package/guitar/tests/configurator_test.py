@@ -23,7 +23,6 @@ class TestConfigurator(unittest.TestCase):
 
         answers = [1, 'my_db_name', 'my_db_user', '^test_url/', None]
 
-
         for question in configurator:
             answer = answers.pop(0)
 
@@ -107,8 +106,9 @@ class TestConfigurator(unittest.TestCase):
                 'patch': {
                     'item_to_add': u"url(r'^test_url/', include('foo.urls'))",
                     'after': None,
-                    'before': None}
-                },
+                    'before': None
+                }
+            },
             u'settings': {
                 'file_path': 'dummy',
                 'patch': {

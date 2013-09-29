@@ -1,6 +1,6 @@
 from item_patchers import (
-    ItemPatcher, SettingsPatcher,
-    MiddlewarePatcher, AppsPatcher, UrlsPatcher, ValidationError)
+    SettingsPatcher, MiddlewarePatcher,
+    AppsPatcher, UrlsPatcher, ValidationError)
 
 
 class Patcher:
@@ -69,5 +69,3 @@ class _Files:
 
     def update(self, path, content):
         self.contents[path] = content
-
-

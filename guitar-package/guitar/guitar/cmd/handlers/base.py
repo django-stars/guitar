@@ -1,5 +1,6 @@
 from guitar import VERSION
 
+
 class CommandHandler(object):
     def __init__(self, command, options):
         self.options = options

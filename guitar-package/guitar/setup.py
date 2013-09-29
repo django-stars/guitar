@@ -1,5 +1,7 @@
 from distutils.core import setup
-import setuptools
+
+# setuptools is required to call `setup.py develop`
+#import setuptools
 
 from guitar import VERSION
 

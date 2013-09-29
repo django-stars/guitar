@@ -1,6 +1,6 @@
 from .base import CommandHandler
 from guitar import fetcher
-from guitar import inquirer
+
 
 class InstallHandler(CommandHandler):
     def handle(self):
@@ -25,5 +25,3 @@ class InstallHandler(CommandHandler):
                 print('You can help, by contributing such configuration,')
                 print('To do so, type: `guitar create {}` to create barebone configuration.'.format(package))
                 #print inquirer.dialogs.YesNo('Do you want to simply install apckage using `pip`?').do()
-
-

@@ -219,7 +219,6 @@ WSGI_APPLICATION = 'guitar.wsgi.application'
         self.assertEqual(settings_py_append_before, new_settings_py)
 
 
-
 class AppsTestPatcher(unittest.TestCase):
     settings_py = """
 INSTALLED_APPS = (
@@ -377,6 +376,7 @@ urlpatterns = patterns('',
         patch_obj = {'before': None, 'after': '^admin/', 'item_to_add': "url(_(r'^foo/'), include('foo.urls'))"}
         new_urls_py = UrlsPatcher().apply_patch(self.urls_py, patch_obj)
         self.assertEqual(settings_py_append_after, new_urls_py)
+
     def test_append_before(self):
         urls_py_append_before = """
 from django.conf.urls import patterns, include, url

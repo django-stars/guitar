@@ -32,11 +32,14 @@ class Message(object):
 def success(msg):
     Message(msg, kind="success")
 
+
 def warning(msg):
     Message(msg, kind="warning")
 
+
 def error(msg):
     Message(msg, kind="error")
+
 
 def message(msg):
     Message(msg, kind="message")

@@ -1,8 +1,9 @@
 import json
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 
 from .models import Chord
+
 
 def api_chord_search(request, q):
     chords = Chord.active.filter(title__icontains=q).values_list('title', flat=True)

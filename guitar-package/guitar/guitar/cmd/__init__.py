@@ -16,7 +16,7 @@ Options:
   -q --quiet                Show no output
   -N --no-patch             Do not write any changes, only dump on screen.
   -O --overwrite            Allow to overwrite existing lines.
-  -D --default              Do not ask any questions. Use defauts.
+  -D --default              Do not ask any questions. Use defaults.
   -l --local-settings       Write changes to "local settings" file only.
   --save                    Save investigated into .guitar file
   -U --urls-file=<upath>
@@ -32,14 +32,15 @@ import handlers.create
 import handlers.investigate
 
 HANDLERS = {
-        'install': handlers.install.InstallHandler,
-        'search': handlers.search.SearchHandler,
-        'investigate': handlers.investigate.InvestigateHandler,
-        'create': handlers.create.CreateHandler,
-        # Key is so strange as it is should be similar to key in
-        # arguments dict, returned by docopt.
-        '--version': handlers.base.VersionHandler,
-    }
+    'install': handlers.install.InstallHandler,
+    'search': handlers.search.SearchHandler,
+    'investigate': handlers.investigate.InvestigateHandler,
+    'create': handlers.create.CreateHandler,
+    # Key is so strange as it is should be similar to key in
+    # arguments dict, returned by docopt.
+    '--version': handlers.base.VersionHandler,
+}
+
 
 class Router(object):
     def __init__(self, arguments):

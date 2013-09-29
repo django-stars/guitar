@@ -6,12 +6,14 @@ from .models import Chord
 def home(request):
     return render(request, 'home.html')
 
+
 def chord_list(request):
     chords = Chord.active.all()
     data = {
         'chords': chords
     }
     return render(request, 'chord/list.html', data)
+
 
 def chord_details(request, title):
     chord = get_object_or_404(Chord.active, title=title)

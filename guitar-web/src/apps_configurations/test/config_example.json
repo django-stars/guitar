@@ -1,16 +1,18 @@
 [{
     // seetings, middleware, installed_apps or urls
     "type": "settings",
+    // Variables that are used in template. Currently is requred will be removed in future.
+    "variables": ["engine", "db_user", "db_password", "db_name"],
     // settings.tpl - <type>.tpl
     "template_type": "file",
     "questions":[{
         // Question 1
         "title":"Select db engine",
-        // User have to select ansver among sugessted questions (see below). Is default type, you can omit.
-        "type": "ansvers_list",
+        // User have to select answer among sugessted questions (see below). Is default type, you can omit.
+        "type": "answers_list",
         // engine situated in settings.tpl - %(engine)s (string formatting)
         "variable": "engine",
-        "ansvers": [
+        "answers": [
             { "value":"postgresql_psycopg2", "title":"I want use postgresql_psycopg2"},
             { "value":"postgresql", "title":"I want use postgresql"},
             { "value":"mysql", "title":"I want use mysql"},
@@ -20,11 +22,11 @@
       {
          "title":"Enter db user name",
          "variable":"db_user",
-         // User have to input ansver in console.
+         // User have to input answer in console.
          "type": "input",
          // Do not ask question if engine == sqlite3
          "exclude": [
-            {"varible":"engine", "value":"sqlite3"}
+            {"variable":"engine", "value":"sqlite3"}
          ]
       },
       {
@@ -32,7 +34,7 @@
          "variable":"db_password",
          "type":"input",
          "exclude":[
-            {"varible":"engine", "value":"sqlite3"}
+            {"variable":"engine", "value":"sqlite3"}
          ]
       }
    ]

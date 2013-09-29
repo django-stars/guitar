@@ -33,8 +33,7 @@ class SettingsPatcher(ItemPatcher):
     def apply_patch(self, content, patch_obj):
         # Now Just add code to end of file
         #TODO: reformat code reindent.py?/?
-        patch = '\n'.join(patch_obj)
-        content += '\n%s\n' % patch
+        content += '\n%s\n' % patch_obj['item_to_add']
         return content
 
 
@@ -133,13 +132,11 @@ class ListPatcher(ItemPatcher):
 
 class MiddlewarePatcher(ListPatcher):
     def apply_patch(self, content, patch_obj):
-        patch_obj['item_to_add'] = patch_obj['middleware']
         return super(MiddlewarePatcher, self).apply_patch(content, patch_obj, 'MIDDLEWARE_CLASSES')
 
 
 class AppsPatcher(ListPatcher):
     def apply_patch(self, content, patch_obj):
-        patch_obj['item_to_add'] = patch_obj['app']
         return super(AppsPatcher, self).apply_patch(content, patch_obj, 'INSTALLED_APPS')
 
 
@@ -170,7 +167,7 @@ class UrlsPatcher(ItemPatcher):
                 else:
                     place_id_to_append = index_where_item
 
-        item_to_append = self._prepare_item_to_append(patch_obj['url'])
+        item_to_append = self._prepare_item_to_append(patch_obj['item_to_add'])
 
         if place_id_to_append == len(parts) - 1:
             # If we add in end of list, add identation before

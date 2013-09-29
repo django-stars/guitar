@@ -1,4 +1,61 @@
+{% extends "base.html" %}
 {% block content %}
-    Home
-    <a href="{% url "chord:list" %}">List</a>
+    <header>
+        <h1>guitar</h1>
+        <h2>django package manager</h2>
+    </header>
+    <article>
+        <p class="notify">30 Sep, 2013: Current state of project is pre-pre-alpha. We are happy to hear your feedback or suggestions.</p>
+    </article>
+    <article>
+        <h1>What?</h1>
+        <p>
+            <strong>guitar</strong> is a tool, which should help integrate existing django applications into your project code.
+        </p>
+        <p>
+            As you may know, installing some of applications is not so trivial as adding them into INSTALLED_APPS
+            section of your settings.py file. You should go through application documentation, determine suitable settings
+            and then put them inside your settings file. In addition you may need to update urls.py file, put middleware
+            into proper order (after A, but before B, or so).
+        </p>
+        <p>
+            <strong>guitar</strong> trying simplify this process, by providing friendly commandline utility. Asking questions regarding
+            different application options it will be able to create proper configuration and patch your project files, so that you
+            no need to do this by hand.
+        </p>
+    </article>
+    <article>
+        <h1>Instalation</h1>
+        <p>
+            <code>&gt; pip install guitar</code>
+            Will install <strong>guital</strong> commandline utility and all it dependencies. In case you use virtualenv,
+            you no need to have copy of <strong>guitar</strong> in each of your virtual environments. So that it can be
+            installed system-wide.
+        </p>
+    </article>
+    <article>
+        <h1>Usage</h1>
+        <p>
+            <code>&gt; guitar search &lt;package&gt;</code> Will perform searching of configurations (<strong>chord</strong>)
+            for required package. As this is extremely young project, there not a lot of ready-to-use configurations,
+            but this should be fixed in future.
+        </p>
+        <p>
+            If you want to help, you need to scroll to <strong>Contribute</strong> section.
+        </p>
+        <p>
+            <code>&gt; guitar install &lt;package&gt;</code> Will check if package already installed
+            (if no, it will be installed using pip), fetch configuration from server, ask you amount of questions and
+            patch your project settings, urls files. You can tune/suggest <strong>guiter</strong> by calling with specific options.
+            <br/>You can see list of all available options by issuing <code>&gt; guitar -h</code>.
+        </p>
+    </article>
+    <article>
+        <h1>Contribute</h1>
+        <p>
+            <code>&gt; guitar create &lt;package&gt;</code> Will create barebone configuration file, which you need to tune.
+            After you finish it you can contribute it, by sending pull request to repository with configurations.
+        </p>
+    </article>
+    <!--a href="{% url "chord:list" %}">List</a-->
 {% endblock content %}

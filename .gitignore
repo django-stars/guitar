@@ -4,6 +4,8 @@
 *.db
 guitar-web/src/guitar/settings/local.py
 guitar-package/guitar/guitar.egg-info/
+guitar-package/guitar/build/
+guitar-package/guitar/dist/
 
 # Mr Developer
 .mr.developer.cfg

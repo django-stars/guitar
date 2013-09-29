@@ -5,7 +5,7 @@ from .forms import ChordAdminForm
 
 class ChordAdmin(admin.ModelAdmin):
     form = ChordAdminForm
-    list_dispay = ('title', 'is_active', 'updated')
+    list_display = ('title', 'is_active', 'updated')
 
     fieldsets = (
         (None, {

@@ -1,0 +1,5 @@
+{% block content %}
+    {% for chord in chords %}
+        <a href="{% url "chord:details" chord.title %}">{{ chord.title }}</a>
+    {% endfor %}
+{% endblock content %}

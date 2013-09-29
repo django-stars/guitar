@@ -6,31 +6,24 @@ class InstallHandler(CommandHandler):
     def handle(self):
         for package in self.options.packages:
             print('Installation emulation for package `{}`'.format(package))
-            print('Fetchinf configuration file...')
+            print('Fetching configuration file...')
             config = fetcher.fetcher.get_config(package)
             if config:
                 print('Fetching OK. Continue...')
+                # TODO: Check if package already installed by pip
+                # TODO: Investigate project structure to find required files.
+                # TODO: Ask questions
+                # TODO: Write changes to settings, urls, requirements.
             else:
                 print('Fetching NOT FOUND...')
                 # Check https://pypi.python.org/pypi/{} if package really exist.
+                # XXX: We can have configurations, not related to packages, like:
+                # - simplify CACHE, DATABASE, DEFAULT_CONTEXT_PROCESSORS configuration.
+                # - scaffolding?
+                # So that is is not necessary, that pypi should return 200
                 print('We do not have configuration for package you trying to install.')
                 print('You can help, by contributing such configuration,')
-                print('to do so, type: `guitar create {}` to create barebone configuration.'.format(package))
-                print inquirer.dialogs.YesNo('Do you want to simply install apckage using `pip`?').do()
-                a = """Remove any common leading whitespace from every line in text.
+                print('To do so, type: `guitar create {}` to create barebone configuration.'.format(package))
+                #print inquirer.dialogs.YesNo('Do you want to simply install apckage using `pip`?').do()
 
-                This can be used to make triple-quoted strings line up with the left edge of the display, while still presenting them in the source code in indented form.
-                Note that tabs and spaces are both treated as whitespace, but they are not equal: the lines "  hello" and "\thello" are considered to have no common leading whitespace. (This behaviour is new in Python 2.5; older versions of this module incorrectly expanded tabs before searching for common leading whitespace.)
-                """
-                inquirer.messages.warning(a)
-
-                b = inquirer.dialogs.Ask("What is your name bro?").do()
-                inquirer.messages.success(b)
-
-                #choices = (
-                #    ('SOME_VALUE', 'This is some value\nAnd there is more big description'),
-                #    ('BHT', 'This is unclear info')
-                #    )
-                #
-                #inquirer.select(choices, title='Simple Title')
 

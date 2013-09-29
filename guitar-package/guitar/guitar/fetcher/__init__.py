@@ -13,7 +13,7 @@ class GuitarWebAPI(object):
         self.url = url
 
     def search(self, q):
-        url  =self.url + 'search/' + q + '/'
+        url = self.url + 'search/' + q + '/'
         res = urllib2.urlopen(url)
         return json.loads(res.read())
 

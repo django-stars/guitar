@@ -6,18 +6,29 @@ from guitar import VERSION
 setup(
     name='guitar',
     version=VERSION,
-    author='guitar team',
-    author_email='...',
-    url='http://pypi.python.org/pypi/guitar/',
-    description='...',
+    author='Roman Osipenko & Dmitry Upolovnikov',
+    author_email='roman.osipenko@djangostars.com',
+    url='http://guitar.djangostars.com/',
+    description='django package manager',
     packages=['guitar'],
     scripts=['bin/guitar'],
-    license=open('LICENSE.md').read(),
+    keywords='django package configure install scaffold',
+    license='MIT',
     long_description=open('README.txt').read(),
     install_requires=[
         "pip>= 1.3.1",
         "clint>= 0.3.1",
         "docopt>= 0.6.1"
     ],
-    test_suite='tests'
+    #test_suite='tests',
+    classifiers=[
+        'Environment :: Web Environment',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ]
 )

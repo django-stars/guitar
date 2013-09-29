@@ -79,7 +79,7 @@ class Options(object):
         self.overwrite = arguments['--overwrite']
 
         # We no need ability to list package twice or so -> set()
-        self.packages = set(arguments['<name>'])
+        self.packages = list(set(arguments['<name>']))
 
     def get_full_path(self, path):
         if path:

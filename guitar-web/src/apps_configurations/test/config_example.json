@@ -1,0 +1,60 @@
+[{
+    // seetings, middleware, installed_apps or urls
+    "type": "settings",
+    // settings.tpl - <type>.tpl
+    "template_type": "file",
+    "questions":[{
+        // Question 1
+        "title":"Select db engine",
+        // User have to select ansver among sugessted questions (see below). Is default type, you can omit.
+        "type": "ansvers_list",
+        // engine situated in settings.tpl - %(engine)s (string formatting)
+        "variable": "engine",
+        "ansvers": [
+            { "value":"postgresql_psycopg2", "title":"I want use postgresql_psycopg2"},
+            { "value":"postgresql", "title":"I want use postgresql"},
+            { "value":"mysql", "title":"I want use mysql"},
+            { "value":"sqlite3", "title":"I want use sqlite3"}
+         ]
+      },
+      {
+         "title":"Enter db user name",
+         "variable":"db_user",
+         // User have to input ansver in console.
+         "type": "input",
+         // Do not ask question if engine == sqlite3
+         "exclude": [
+            {"varible":"engine", "value":"sqlite3"}
+         ]
+      },
+      {
+         "title":"Enter db user password",
+         "variable":"db_password",
+         "type":"input",
+         "exclude":[
+            {"varible":"engine", "value":"sqlite3"}
+         ]
+      }
+   ]
+},
+{
+    "type": "urls",
+    // String template
+    "template": "url(r'%(url_re)s', include('foo.urls'))",
+    "questions": [
+        {
+            "title": "Enter reg exp for app urls. Or skip if want use default value - ^foo/",
+            "default": "^foo/",
+            "type": "input",
+            "variable": "url_re"
+        }
+    ]
+},
+{
+    "type": "installed_apps",
+    "template": "foo.bar",
+    // insert "foo.bar" app after "django.contrib.sessions"
+    "add_after": "django.contrib.sessions"
+    // or you can add before
+    //"add_before": "django.contrib.sessions"
+}]

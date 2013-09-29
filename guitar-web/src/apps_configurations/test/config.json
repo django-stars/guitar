@@ -1,0 +1,49 @@
+[{
+    "type": "settings",
+    "template_type": "file",
+    "questions":[{
+        "title":"Select db engine",
+        "type": "ansvers_list",
+        "variable": "engine",
+        "ansvers": [
+            { "value":"postgresql_psycopg2", "title":"I want use postgresql_psycopg2"},
+            { "value":"postgresql", "title":"I want use postgresql"},
+            { "value":"mysql", "title":"I want use mysql"},
+            { "value":"sqlite3", "title":"I want use sqlite3"}
+         ]
+      },
+      {
+         "title":"Enter db user name",
+         "variable":"db_user",
+         "type": "input",
+         "exclude": [
+            {"varible":"engine", "value":"sqlite3"}
+         ]
+      },
+      {
+         "title":"Enter db user password",
+         "variable":"db_password",
+         "type":"input",
+         "exclude":[
+            {"varible":"engine", "value":"sqlite3"}
+         ]
+      }
+   ]
+},
+{
+    "type": "urls",
+    "template": "url(r'%(url_re)s', include('foo.urls'))",
+    "questions": [
+        {
+            "title": "Enter reg exp for app urls. Or skip if want use default value - ^foo/",
+            "default": "^foo/",
+            "type": "input",
+            "variable": "url_re"
+        }
+    ]
+},
+{
+    "type": "installed_apps",
+    "template": "foo.bar",
+    "add_after": "django.contrib.sessions"
+}]

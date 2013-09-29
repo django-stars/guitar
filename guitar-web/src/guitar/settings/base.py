@@ -1,8 +1,9 @@
 import os
+import sys
 
-PROJECT_DIR = os.path.dirname(__file__)
-#sys.path.append(os.path.join(PROJECT_DIR, 'apps'),)
-PUBLIC_DIR = os.path.join(PROJECT_DIR, '..', '..', 'public')
+PROJECT_DIR = os.path.join(os.path.dirname(__file__), '..')
+sys.path.append(os.path.join(PROJECT_DIR))
+PUBLIC_DIR = os.path.join(PROJECT_DIR, '..', 'public')
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -72,6 +73,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'guitar.configurator'
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -101,7 +103,7 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(PROJECT_DIR, '../../', 'logs', 'guitar.log'),
+            'filename': os.path.join(PROJECT_DIR, '../', 'logs', 'guitar.log'),
             'maxBytes': 1024 * 1024 * 10,
             'backupCount': 50,
             'formatter': 'standard',
@@ -133,3 +135,7 @@ LOGGING = {
         }
     }
 }
+
+APPS_CONFIGS_PATH = os.path.join(PROJECT_DIR, '..', 'apps_configurations')
+
+from local import *

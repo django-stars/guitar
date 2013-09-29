@@ -1,3 +1,6 @@
+import urllib2
+import json
+
 FAKE_PACKAGES = (
     'south',
     'django-debug-toolbar',
@@ -9,10 +12,17 @@ class GuitarWebAPI(object):
     def __init__(self, url):
         self.url = url
 
+    def search(self, q):
+        url  =self.url + 'search/' + q + '/'
+        res = urllib2.urlopen(url)
+        return json.loads(res.read())
+
     def get_config(self, package, version=None):
-        # There we should sent request to server and get config :)
-        if package in FAKE_PACKAGES:
-            return "CONFIG EMULATOR"
+        url  =self.url + 'search/' + package + '/'
+        print url
+        res = urllib2.urlopen(url)
+        print res
 
 
-fetcher = GuitarWebAPI('http://guitar.djangostars.com')
+
+fetcher = GuitarWebAPI('http://localhost:8000/api/v1/')
